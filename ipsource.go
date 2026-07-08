@@ -403,8 +403,8 @@ func ipnetToPrefix(ipNet *net.IPNet) netip.Prefix {
 	if !ok {
 		return netip.Prefix{}
 	}
-	// Per doc, the standard `IPv4{}` structs uses 4-in-6 representation,
-	// which causes `addr.Is4()` fail for valid v4 addresses.
+	// Per the docs, the standard `IP{}` structs uses 4-in-6 representation when retrieve ips
+	// from the underlying iface, which causes `addr.Is4()` fail for valid v4 addresses.
 	// The `Unmap()` call will leave the `addr` unmodified if it's not a 4-in-6 addr.
 	addr = addr.Unmap()
 	prefixSize, _ := ipNet.Mask.Size()
